@@ -1,26 +1,23 @@
-import app from './app.js'
-import sequelize from './src/config/database.js'
+import app from "./app.js";
+import sequelize from "./src/config/database.js";
 
 async function main() {
-    try {
-        const init = process.argv[2]
+  try {
+    const init = process.argv[2];
 
-        if (init)
-            await sequelize.sync({force: true});
-        else
-            await sequelize.sync({force: false});
-        
-        console.log('Connection successful')
-        
-        var PORT = 3001;
+    if (init) await sequelize.sync({ force: true });
+    else await sequelize.sync({ force: false });
 
-        app.listen(PORT);
+    console.log("Connection successful");
 
-        console.log('App Iniciada en puerto '+PORT)
+    var PORT = process.env.PORT || 3001;
 
-    } catch (error) {
-        console.error('Connection error', error)
-    }
+    app.listen(PORT);
+
+    console.log("App Iniciada en puerto " + PORT);
+  } catch (error) {
+    console.error("Connection error", error);
+  }
 }
 
-main()
+main();
